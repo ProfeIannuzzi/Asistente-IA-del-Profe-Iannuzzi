@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Asistente IA del Profe Iannuzzi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
+    <script type="module" src="/src/main.js"></script>
+    <style>
+      body {
+        font-family: 'Spectral', serif;
+        background-color: #f0f4f8;
+        color: #1a1a1a;
+        text-align: center;
+        padding: 2rem;
+      }
+      .logo {
+        width: 200px;
+        margin-bottom: 1rem;
+      }
+      textarea {
+        width: 90%;
+        margin: 1rem auto;
+        font-family: inherit;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="/public/logo.png" alt="Logo" class="logo">
+    <h1>Asistente IA del Profe Iannuzzi</h1>
+    <input id="password" type="password" placeholder="Contraseña de acceso" /><br />
+    <textarea id="question" rows="5" placeholder="Escribí tu pregunta..."></textarea><br />
+    <button onclick="ask()">Preguntar</button>
+    <pre id="answer"></pre>
+  </body>
+</html>
