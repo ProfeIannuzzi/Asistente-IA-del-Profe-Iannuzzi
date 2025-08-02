@@ -5,17 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Asistente IA del Profe Iannuzzi</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet" />
 </head>
 <body>
   <div class="container">
-    <h1>🎓 Bienvenido al la Tutoría "IA"NNUZZI, tu profe virtual !!</h1>
-    <input type="password" id="password" placeholder="Contraseña" />
-    <textarea id="question" placeholder="Escribí tu pregunta..."></textarea>
-    <button onclick="ask()">Preguntar</button>
-    <button onclick="toggleRepaso()">🧠 Modo Repaso</button>
-    <div id="loader" class="loader hidden"></div>
-    <div id="answer" class="answer"></div>
+    <img src="public/logo.png" alt="Logo del Profe" class="logo" />
+    <h1 class="bienvenida">🎓 Bienvenido a la Tutoría "<span class="resaltado">IA</span>NNUZZI", tu profe virtual</h1>
+    <p class="subtitulo">Ingresá la contraseña para comenzar</p>
+
+    <input id="password" type="password" placeholder="Contraseña" />
+
+    <textarea id="question" placeholder="Escribí tu pregunta aquí..."></textarea>
+
+    <div class="botones">
+      <button onclick="ask()">💬 Preguntar</button>
+      <button class="repaso" onclick="repaso()">📘 Modo repaso</button>
+    </div>
+
+    <div id="answer" class="respuesta"></div>
   </div>
+
   <script src="main.js"></script>
 </body>
 </html>
