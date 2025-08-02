@@ -14,7 +14,7 @@ async function ask() {
   answerEl.innerHTML = `<div class="loader"></div>`;
 
   try {
-    const response = await fetch(`${backendUrl}/api/ask`, {
+    const response = await fetch("https://asistente-ia-del-profe-iannuzzi-2.onrender.com/api/ask", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -43,7 +43,7 @@ async function ampliarRespuesta(pregunta) {
   answerEl.innerHTML = `<div class="loader"></div>`;
 
   try {
-    const response = await fetch(`${backendUrl}/api/expandir`, {
+    const response = await fetch("https://asistente-ia-del-profe-iannuzzi-2.onrender.com/api/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ pregunta })
