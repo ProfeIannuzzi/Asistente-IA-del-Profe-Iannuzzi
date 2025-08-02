@@ -7,9 +7,8 @@ La IA es entrenada con el material desarrollado por el Esp. Prof. Ing. Tec. Marc
 
 Desplegable en Render, Acceso con contraseña
 
-## Característica:
-- Tenga Paciencia, se utilizan recursos gratuitos para este asistente, por lo que no tendrá la performance de las IA disponibles en internet.
-
-
-
-
+## 🔐 Cambiar la clave de acceso ("mfi")
+edite el archivo main.js, cambiando la clave 'mfi' por la que desee:
+...
+  if (password !== 'mfi') {
+...
