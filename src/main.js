@@ -7,7 +7,7 @@ async function ask() {
 
   const question = document.getElementById('question').value;
 
-  const response = await fetch("https://TU_BACKEND_RENDER.onrender.com/api/ask", {
+  const response = await fetch("https://asistente-ia-del-profe-iannuzzi-2.onrender.com/api/ask", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
