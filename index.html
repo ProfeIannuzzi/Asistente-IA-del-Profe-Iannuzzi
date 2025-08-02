@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,16 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Asistente IA del Profe Iannuzzi</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="public/logo.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <img src="public/logo.png" alt="Logo del Profe Iannuzzi" class="logo" />
-    <h1>Asistente IA del Profe Iannuzzi</h1>
-    <input type="password" id="password" placeholder="Clave de acceso" />
-    <textarea id="question" placeholder="¿Qué tema querés consultar hoy?"></textarea>
-    <button onclick="ask()">Preguntar</button>
-    <pre id="answer"></pre>
+  <img src="public/logo.png" alt="Logo del Profe" width="100" />
+  <h1>🎓 Bienvenido a la Tutoría "IA"NNUZZI, tu profe virtual !!</h1>
+
+  <input type="password" id="password" placeholder="Ingresá la contraseña" />
+  <br />
+
+  <input type="text" id="question" placeholder="¿Qué querés preguntarle a la IA?" />
+  <br />
+
+  <button onclick="ask()">Preguntar</button>
+  <button onclick="mostrarRepaso()">🧠 Modo Repaso</button>
+
+  <div id="repaso" style="display: none;">
+    <h2>📘 Escribí el tema sobre el que querés practicar:</h2>
+    <input type="text" id="tema" placeholder="Ej: Ley de Ohm, Mediciones eléctricas..." />
+    <br />
+    <button onclick="iniciarRepaso()">Comenzar Repaso</button>
   </div>
+
+  <div id="answer"></div>
+
   <script src="main.js"></script>
 </body>
 </html>
