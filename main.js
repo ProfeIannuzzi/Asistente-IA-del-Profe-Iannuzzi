@@ -1,4 +1,4 @@
-async function ask(ampliar = false) {
+async function ask() {
   const password = document.getElementById('password').value;
   if (password !== 'mfi') {
     alert("No, No, No....  ESA NO ES!!");
@@ -6,62 +6,63 @@ async function ask(ampliar = false) {
   }
 
   const question = document.getElementById('question').value;
-  const answerEl = document.getElementById("answer");
-  answerEl.innerHTML = '<div class="loader"></div>';
-
-  try {
-    const response = await fetch("https://asistente-ia-del-profe-iannuzzi-2.onrender.com/api/ask", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question, ampliar })
-    });
-
-    const data = await response.json();
-    answerEl.innerHTML = "";
-
-    if (data.answer) {
-      answerEl.innerHTML = `
-        <div class="respuesta-animada">${data.answer}</div>
-        ${!ampliar ? `<button onclick="ask(true)" class="btn-ampliar">🔍 Ampliar con fuentes confiables</button>` : ""}
-      `;
-    } else {
-      answerEl.innerText = "⚠️ Error al generar respuesta.";
-    }
-
-  } catch (error) {
-    answerEl.innerText = "❌ Error de conexión con el servidor.";
-  }
-}
-
-function mostrarRepaso() {
-  document.getElementById("repaso").style.display = "block";
-}
-
-async function iniciarRepaso() {
-  const password = document.getElementById('password').value;
-  if (password !== 'mfi') {
-    alert("No, No, No....  ESA NO ES!!");
+  if (!question.trim()) {
+    alert("Por favor, escribí una pregunta.");
     return;
   }
 
-  const tema = document.getElementById('tema').value;
-  const answerEl = document.getElementById("answer");
-  answerEl.innerHTML = '<div class="loader"></div>';
+  document.getElementById('loader').classList.remove('hidden');
+  document.getElementById('answer').innerText = '';
 
   try {
     const response = await fetch("https://asistente-ia-del-profe-iannuzzi-2.onrender.com/api/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ modo: "repaso", tema })
+      body: JSON.stringify({ question, ampliar: true })
     });
 
     const data = await response.json();
-    answerEl.innerHTML = `
-      <div class="respuesta-animada">${data.answer}</div>
-      <button onclick="iniciarRepaso()" class="btn-ampliar">🔁 Nueva pregunta</button>
-      <button onclick="location.reload()" class="btn-ampliar">🏠 Volver al inicio</button>
-    `;
+    if (data?.answer) {
+      document.getElementById("answer").innerHTML = data.answer.replace(/\n/g, "<br>");
+    } else {
+      document.getElementById("answer").innerText = "Error al generar respuesta.";
+    }
   } catch (error) {
-    answerEl.innerText = "❌ Error al generar repaso.";
+    document.getElementById("answer").innerText = "Error al contactar con el servidor.";
+  } finally {
+    document.getElementById('loader').classList.add('hidden');
   }
+}
+
+function toggleRepaso() {
+  const tema = prompt("¿Sobre qué tema querés practicar?");
+  if (!tema) return;
+
+  document.getElementById('loader').classList.remove('hidden');
+  document.getElementById('answer').innerText = '';
+
+  fetch("https://asistente-ia-del-profe-iannuzzi-2.onrender.com/api/ask", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ modo: "repaso", tema })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data?.answer) {
+      const respuesta = `
+        <p>${data.answer.replace(/\n/g, "<br>")}</p>
+        <button onclick="toggleRepaso()">📚 Nueva pregunta del mismo tema</button>
+        <button onclick="location.reload()">🔙 Volver a la página de bienvenida</button>
+      `;
+      document.getElementById("answer").innerHTML = respuesta;
+    } else {
+      document.getElementById("answer").innerText = "No se pudo obtener una pregunta de repaso.";
+    }
+  })
+  .catch(() => {
+    document.getElementById("answer").innerText = "Error al contactar con el servidor.";
+  })
+  .finally(() => {
+    document.getElementById('loader').classList.add('hidden');
+  });
 }
