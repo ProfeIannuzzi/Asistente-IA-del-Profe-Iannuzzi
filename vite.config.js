@@ -1,7 +1,8 @@
+
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  root: '.', // ⬅️ indica que el index.html está en la raíz
+  root: '.', 
   server: {
     host: true,
     port: 3000
