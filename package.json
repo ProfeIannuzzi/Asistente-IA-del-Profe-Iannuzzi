@@ -1,5 +1,5 @@
 {
-  "name": "Asistente IA del Profe Iannuzzi",
+  "name": "asistente-ia-del-profe-iannuzzi",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
