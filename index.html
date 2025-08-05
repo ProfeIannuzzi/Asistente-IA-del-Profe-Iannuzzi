@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Asistente IA del Profe Iannuzzi</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <img src="public/logo.png" alt="Logo del Profe Iannuzzi" class="logo" />
+
+    <h1>🎓 Bienvenido a la Tutoría "IA"NNUZZI, tu profe virtual !!</h1>
+
+    <input type="password" id="password" placeholder="Ingresá la contraseña" />
+
+    <textarea id="question" placeholder="Escribí tu pregunta aquí..."></textarea>
+
+    <div class="botones">
+      <button onclick="ask()">🤖 Preguntar</button>
+      <button onclick="activarModoRepaso()">🔁 Modo Repaso</button>
+    </div>
+
+    <div id="loader" class="loader" style="display: none;"></div>
+
+    <div id="answer" class="respuesta"></div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
