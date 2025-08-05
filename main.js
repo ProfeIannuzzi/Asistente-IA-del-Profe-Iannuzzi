@@ -1,42 +1,37 @@
-let modoRepaso = false;
-
 async function ask() {
   const password = document.getElementById('password').value;
   if (password !== 'mfi') {
-    alert("Clave Incorreta, Reintente...");
+    alert("No, No, No....  ESA NO ES!!");
     return;
   }
 
   const question = document.getElementById('question').value.trim();
   if (!question) {
-    alert("Por favor ingresá una pregunta.");
+    alert("Por favor, escribí una pregunta.");
     return;
   }
 
   mostrarLoader(true);
-  document.getElementById("answer").innerText = "";
 
   try {
     const response = await fetch("https://asistente-ia-del-profe-iannuzzi-2.onrender.com/api/ask", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ question })
     });
 
     const data = await response.json();
+    mostrarLoader(false);
 
     if (data.answer) {
-      document.getElementById("answer").innerText = data.answer;
+      mostrarRespuesta(data.answer);
     } else {
-      document.getElementById("answer").innerText = "⚠️ No se pudo obtener respuesta.";
+      mostrarRespuesta("⚠️ No se pudo obtener respuesta.");
     }
   } catch (error) {
-    document.getElementById("answer").innerText = "⚠️ Error de conexión con el servidor.";
+    mostrarLoader(false);
+    mostrarRespuesta("⚠️ Error al conectarse con el servidor.");
   }
-
-  mostrarLoader(false);
 }
 
 async function activarModoRepaso() {
@@ -46,33 +41,38 @@ async function activarModoRepaso() {
     return;
   }
 
-  const tema = prompt("¿Sobre qué tema querés repasar?");
+  const tema = prompt("📚 ¿Sobre qué tema querés repasar?");
   if (!tema) return;
 
   mostrarLoader(true);
-  document.getElementById("answer").innerText = "";
 
   try {
     const response = await fetch("https://asistente-ia-del-profe-iannuzzi-2.onrender.com/api/ask", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ modo: "repaso", tema })
     });
 
     const data = await response.json();
+    mostrarLoader(false);
 
     if (data.answer) {
-      document.getElementById("answer").innerText = data.answer;
+      mostrarRespuesta(data.answer);
     } else {
-      document.getElementById("answer").innerText = "⚠️ No se pudo obtener pregunta de repaso.";
+      mostrarRespuesta("⚠️ No se pudo generar una pregunta.");
     }
   } catch (error) {
-    document.getElementById("answer").innerText = "⚠️ Error de conexión con el servidor.";
+    mostrarLoader(false);
+    mostrarRespuesta("⚠️ Error al conectarse con el servidor.");
   }
+}
 
-  mostrarLoader(false);
+function mostrarRespuesta(texto) {
+  const answer = document.getElementById("answer");
+  answer.innerText = texto;
+  answer.classList.remove("fade");
+  void answer.offsetWidth; // Reiniciar animación
+  answer.classList.add("fade");
 }
 
 function mostrarLoader(visible) {
